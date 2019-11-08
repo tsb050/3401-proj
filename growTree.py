@@ -73,26 +73,57 @@ def get_age_splitting_value(test_dict):
             ent_label = c2[num]/len(greater_attr_index[ii])
             great_entropy -= (ent_label) * math.log2(ent_label)
 
-        print("Less entropy", less_entropy)
-        print("Greater entropy", great_entropy)
+        #print("Less entropy", less_entropy)
+        #print("Greater entropy", great_entropy)
         entropy_given = (len(less_attr_index[ii])/len(label_class)) * less_entropy + (
             len(greater_attr_index[ii])/len(label_class)) * great_entropy
-        print("Given AGE {} entropy : {}".format(int(ii)+1, entropy_given))
+        #print("Given AGE {} entropy : {}".format(int(ii)+1, entropy_given))
         main_entropy = entropy_S(test_dict)
         Gain = main_entropy - entropy_given
-        print("Gain ", Gain)
-        print("")
+        #print("Gain ", Gain)
+        # print("")
         pol.append(Gain)
 
     best_splitting_value = pol.index(max(pol)) + 1
     return best_splitting_value, max(pol)
 
+# This does not seem to work for RACE. will debug.
+
+
+def get_attr_gain(attr_name, attribute_dict):
+    label_class = np.asarray(attribute_dict['RISK']).astype(int)
+    attr = np.asarray(attribute_dict['{}'.format(attr_name)]).astype(int)
+    u2, c2 = np.unique(attr, return_counts=True)
+    index = []
+    for d in u2:
+        disc = []
+        for idx, elem in enumerate(attr):
+            if d == elem:
+                disc.append(idx)
+        index.append(disc)
+    entropy_given = 0
+    for idd in index:
+        assess = []
+        for ee in idd:
+            assess.append(label_class[ee])
+        u1, c1 = np.unique(assess, return_counts=True)
+        entropy = 0
+        for num in c1:
+            ent_label = num/len(idd)
+            entropy -= (ent_label) * math.log2(ent_label)
+        entropy_given += (len(idd)/len(label_class)) * entropy
+    main_entropy = entropy_S(attribute_dict)
+    Gain = main_entropy - entropy_given
+    return Gain
+
 
 def main():
     S = entropy_S(attribute_dict)
     age, gain = get_age_splitting_value(attribute_dict)
+    cred_gain = get_attr_gain('INCOME', attribute_dict)
     print('entropy(S): {}'.format(S))
     print("Split value Age: {} at Gain value {}".format(age, gain))
+    print("Gain for CRED_HIS: {}".format(cred_gain))
 
 
 if __name__ == "__main__":
