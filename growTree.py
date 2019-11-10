@@ -1,3 +1,4 @@
+import json
 import numpy as np
 import math
 
@@ -117,13 +118,156 @@ def get_attr_gain(attr_name, attribute_dict):
     return Gain
 
 
+def get_index(unique_list, attr):
+    index = []
+    for d in unique_list:
+        disc = []
+        for idx, elem in enumerate(attr):
+            if d == elem:
+                disc.append(idx)
+        index.append(disc)
+    return index
+
+
+def get_attribute(index, test_attribute, attribute):
+    the_list = list()
+    for ids in index:
+        new_dict = {}
+        for key in attribute:
+            loss = []
+            if key == test_attribute:
+                continue
+            for val in ids:
+                loss.append(np.asarray(attribute[key]).astype(int)[val])
+            new_dict[key] = loss
+        the_list.append(new_dict)
+    return the_list
+
+
+def get_max_gain(attribute_dict):
+    growth = {}
+    for key in attribute_dict:
+        if key == 'RISK':
+            continue
+        gain = get_attr_gain(key, attribute_dict)
+        growth[key] = gain
+    return max(growth, key=growth.get)
+
+
+def grow():
+    # compare the gains and determine the test attribute
+    test_attribute = get_max_gain(attribute_dict)
+    node_1 = np.asarray(attribute_dict[test_attribute]).astype(int)
+    u2, c2 = np.unique(node_1, return_counts=True)
+    root_node_index = get_index(u2, node_1)
+    root_sub_attrs = get_attribute(
+        root_node_index, test_attribute, attribute_dict)
+    print(test_attribute)
+    print(root_sub_attrs)
+    print("-------------------------------------------")
+    sub_root = {}
+    for i in range(len(u2)):
+        sub_root[u2[i]] = root_sub_attrs[i]
+    for sub_key in sub_root:
+        # Check if Risk has uniform values
+        sub_unique = np.unique(sub_root[sub_key]['RISK'])
+        if len(sub_unique) == 1:
+            label = sub_unique[0]
+        else:
+            sub_heading = get_max_gain(sub_root[sub_key])
+            sub_node = np.asarray(sub_root[sub_key][sub_heading]).astype(int)
+            u3 = np.unique(sub_node)
+            sub_node_index = get_index(u3, sub_node)
+            sub_attrs = get_attribute(
+                sub_node_index, sub_heading, sub_root[sub_key])
+            print("-------------------------------------------")
+            print(sub_heading)
+            print(sub_attrs)
+            print("-------------------------------------------")
+            sub_root_2 = {}
+            for i in range(len(u3)):
+                sub_root_2[u3[i]] = sub_attrs[i]
+            for s_key in sub_root_2:
+                sub_unique2 = np.unique(sub_root_2[s_key]['RISK'])
+                if len(sub_unique2) == 1:
+                    label = sub_unique2[0]
+                else:
+                    sub_heading2 = get_max_gain(sub_root_2[s_key])
+                    sub_node_2 = np.asarray(
+                        sub_root_2[s_key][sub_heading2]).astype(int)
+                    u4 = np.unique(sub_node_2)
+                    sub_node_index2 = get_index(u4, sub_node_2)
+                    sub_attrs2 = get_attribute(
+                        sub_node_index2, sub_heading2, sub_root_2[s_key])
+                    print("-------------------------------------------")
+                    print(sub_heading2)
+                    print(sub_attrs2)
+                    sub_root_3 = {}
+                    for ii in range(len(u4)):
+                        sub_root_3[u4[ii]] = sub_attrs2[ii]
+                    for s_key in sub_root_3:
+                        sub_unique3 = np.unique(sub_root_3[s_key]['RISK'])
+                        if len(sub_unique3) == 1:
+                            label = sub_unique3[0]
+                        else:
+                            sub_heading3 = get_max_gain(sub_root_3[s_key])
+                            sub_node_3 = np.asarray(
+                                sub_root_3[s_key][sub_heading3]).astype(int)
+                            u5 = np.unique(sub_node_3)
+                            sub_node_index3 = get_index(u4, sub_node_3)
+                            sub_attrs3 = get_attribute(
+                                sub_node_index3, sub_heading3, sub_root_3[s_key])
+                            print("-------------------------------------------")
+                            print(sub_heading3)
+                            print(sub_attrs3)
+                            sub_root_4 = {}
+                            for ii in range(len(u5)):
+                                sub_root_4[u5[ii]] = sub_attrs3[ii]
+                            for s_key in sub_root_4:
+                                sub_unique4 = np.unique(
+                                    sub_root_4[s_key]['RISK'])
+                                if len(sub_unique4) == 1:
+                                    label = sub_unique4[0]
+                                else:
+                                    sub_heading4 = get_max_gain(
+                                        sub_root_4[s_key])
+                                    sub_node_4 = np.asarray(
+                                        sub_root_4[s_key][sub_heading4]).astype(int)
+                                    u6 = np.unique(sub_node_4)
+                                    sub_node_index4 = get_index(u5, sub_node_4)
+                                    sub_attrs4 = get_attribute(
+                                        sub_node_index4, sub_heading4, sub_root_4[s_key])
+                                    print(
+                                        "-------------------------------------------")
+                                    print(sub_heading4)
+                                    print(sub_attrs4)
+                                    sub_root_5 = {}
+                                    for ii in range(len(u5)):
+                                        sub_root_5[u5[ii]] = sub_attrs4[ii]
+                                    for s_key in sub_root_5:
+                                        sub_unique5 = np.unique(
+                                            sub_root_5[s_key]['RISK'])
+                                        if len(sub_unique5) == 1:
+                                            label = sub_unique5[0]
+                                        else:
+                                            try:
+                                                sub_heading5 = get_max_gain(
+                                                    sub_root_5[s_key])
+                                                sub_node_5 = np.asarray(
+                                                    sub_root_5[s_key][sub_heading5]).astype(int)
+                                                u6 = np.unique(sub_node_5)
+                                                sub_node_index5 = get_index(u5, sub_node_5)
+                                                sub_attrs5 = get_attribute(
+                                                    sub_node_index5, sub_heading5, sub_root_5[s_key])
+                                                print("-------------------------------------------")
+                                                print(sub_heading5)
+                                                print(sub_attrs5)
+                                            except ValueError:
+                                                print("Empty sequesnce")
+
+
 def main():
-    S = entropy_S(attribute_dict)
-    age, gain = get_age_splitting_value(attribute_dict)
-    cred_gain = get_attr_gain('INCOME', attribute_dict)
-    print('entropy(S): {}'.format(S))
-    print("Split value Age: {} at Gain value {}".format(age, gain))
-    print("Gain for CRED_HIS: {}".format(cred_gain))
+    grow()
 
 
 if __name__ == "__main__":
