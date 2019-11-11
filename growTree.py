@@ -163,11 +163,13 @@ def grow():
     root_sub_attrs = get_attribute(
         root_node_index, test_attribute, attribute_dict)
     print(test_attribute)
-    print(root_sub_attrs)
     print("-------------------------------------------")
     sub_root = {}
+    my_dict = []
+    my_dict.append(test_attribute)
     for i in range(len(u2)):
         sub_root[u2[i]] = root_sub_attrs[i]
+    sub_val = {}
     for sub_key in sub_root:
         # Check if Risk has uniform values
         sub_unique = np.unique(sub_root[sub_key]['RISK'])
@@ -180,13 +182,11 @@ def grow():
             sub_node_index = get_index(u3, sub_node)
             sub_attrs = get_attribute(
                 sub_node_index, sub_heading, sub_root[sub_key])
-            print("-------------------------------------------")
-            print(sub_heading)
-            print(sub_attrs)
-            print("-------------------------------------------")
+            sub_val[sub_key] = sub_heading
             sub_root_2 = {}
             for i in range(len(u3)):
                 sub_root_2[u3[i]] = sub_attrs[i]
+            sub_val2 = {}
             for s_key in sub_root_2:
                 sub_unique2 = np.unique(sub_root_2[s_key]['RISK'])
                 if len(sub_unique2) == 1:
@@ -199,8 +199,18 @@ def grow():
                     sub_node_index2 = get_index(u4, sub_node_2)
                     sub_attrs2 = get_attribute(
                         sub_node_index2, sub_heading2, sub_root_2[s_key])
+                    sub_val2[s_key] = sub_heading2
+                    sub_val[sub_key] = [sub_heading, sub_val2]
                     print("-------------------------------------------")
                     print(sub_heading2)
+                    print(sub_root_2[s_key]['RISK'])
+                    #sub_val2[s_key] = sub_heading2
+                    # print(sub_val2)
+                    #sub_val[sub_key] = [sub_heading, sub_val2]
+                    #print(sub_attrs2)
+    my_dict.append(sub_val)
+    print(my_dict)
+    """
                     print(sub_attrs2)
                     sub_root_3 = {}
                     for ii in range(len(u4)):
@@ -264,6 +274,7 @@ def grow():
                                                 print(sub_attrs5)
                                             except ValueError:
                                                 print("Empty sequesnce")
+    """
 
 
 def main():
