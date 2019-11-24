@@ -4,7 +4,7 @@ import math
 
 
 def retrieve_list():
-    my_list = [line.rstrip('\n') for line in open('test.txt')]
+    my_list = [line.rstrip('\n') for line in open('../data/test.txt')]
     return_list = []
     for rows in my_list:
         a = rows.split(" ")
@@ -227,7 +227,7 @@ def grow():
                     sub_val4[str(key4)] = [header4, df]
     my_dict.append(sub_val)
     print(my_dict)
-    with open("nao.txt", 'w') as f:
+    with open("../data/nano.txt", 'w') as f:
         json.dump(my_dict, f)
 
 
