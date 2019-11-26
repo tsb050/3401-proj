@@ -40,18 +40,18 @@ def showIt(fname):
     msg = 'Y'
     #input('Plot un-pruned tree. Plot (Y/N)?')
     if msg == 'Y':
-        with open('../data/deDomain.txt') as f:
+        with open('deDomain.txt') as f:
             m = json.load(f)
-        with open('../data/'+fname) as f:
+        with open('{}'.format(fname)) as f:
             tr = json.load(f)
-        with open('../data/treePicFulltr.txt', 'w') as f:
+        with open('treePicFull.txt', 'w') as f:
             f.write('')
-        with open('../data/treePicFulltr.txt', 'a+') as f:
+        with open('treePicFull.txt', 'a+') as f:
             dispTree(tr, m, [], [], f)
 
 
 def main():
-    showIt('nao.txt')
+    showIt('train_decision_tree.txt')
 
 
 main()
