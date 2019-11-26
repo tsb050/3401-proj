@@ -57,14 +57,14 @@ def accuracy(tr, m, li):
 
 #The function returns the accuracy of the decision tree when running on the test set.
 def main(fname):
-    testdata = np.loadtxt('test.txt', dtype=int)
-    with open('dataDesc.txt') as f:
+    testdata = np.loadtxt('../data/test.txt', dtype=int)
+    with open('../data/dataDesc.txt') as f:
         e = json.load(f)
-    with open(fname) as f:
+    with open('../data/'+fname) as f:
         tr = json.load(f)
     acc = accuracy(tr, testdata, e)
     print(acc)
 
-        #do somethinf
+        #do something
 
 main('train_decision_tree.txt')
