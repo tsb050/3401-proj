@@ -2,35 +2,39 @@ import numpy as np
 import json
 
 
-#Draw the (sub)decision tree rooted at tr. ls recovers the english
-#names for the values in each domain, pre gives the number of blank
-#spaces preceding each level, and f is the file where the drawing
-#will be stored
-def dispTree(tr,ls,sp,sb,f):
+# Draw the (sub)decision tree rooted at tr. ls recovers the english
+# names for the values in each domain, pre gives the number of blank
+# spaces preceding each level, and f is the file where the drawing
+# will be stored
+def dispTree(tr, ls, sp, sb, f):
     if type(tr) != list:
         f.write(ls['RISK'][str(tr)])
         return
-    f.write(tr[0]+'\n') #attribute selected in current node
+    f.write(tr[0]+'\n')  # attribute selected in current node
     j = 0
-    for v in tr[1]:#values in the domain of this attribute
-        sp1 = sp.copy()
-        sb1 = sb.copy()
-        j += 1
-        for k in range(len(sp1)):
-            f.write(' '+sb1[k])
-            for p in range(sp1[k]):
-                f.write(' ')
-        f.write(' !--'+ls[tr[0]][v]+'--')
-        if list == type(tr[1][v]):
-            sk = len(ls[tr[0]][v]) + 5
-            sp1.append(sk)
-            if j < len(tr[1]):
-                sb1.append('!')
+    for v in tr[1]:  # values in the domain of this attribute
+        try:
+            sp1 = sp.copy()
+            sb1 = sb.copy()
+            j += 1
+            for k in range(len(sp1)):
+                f.write(' '+sb1[k])
+                for p in range(sp1[k]):
+                    f.write(' ')
+            f.write(' !--'+ls[tr[0]][v]+'--')
+            if list == type(tr[1][v]):
+                sk = len(ls[tr[0]][v]) + 5
+                sp1.append(sk)
+                if j < len(tr[1]):
+                    sb1.append('!')
+                else:
+                    sb1.append(' ')
+                dispTree(tr[1][v], ls, sp1, sb1, f)
             else:
-                sb1.append(' ')
-            dispTree(tr[1][v],ls,sp1,sb1,f)
-        else:
-            f.write(ls['RISK'][str(tr[1][v])]+'\n')
+                f.write(ls['RISK'][str(tr[1][v])]+'\n')
+        except IndexError:
+            continue
+
 
 def showIt(fname):
     msg = input('Plot un-pruned tree. Plot (Y/N)?')
@@ -45,4 +49,8 @@ def showIt(fname):
             dispTree(tr,m,[],[],f)
 
 
-    
+def main():
+    showIt('train_decision_tree.txt')
+
+
+main()

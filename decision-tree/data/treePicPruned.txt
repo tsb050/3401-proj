@@ -7,7 +7,10 @@ CRED_HIS
  !          !         !            !--senior--L
  !          !         !--poor--AGE
  !          !                    !--youth--H
- !          !                    !--mid_age--H
+ !          !                    !--mid_age--RACE
+ !          !                    !             !--white--H
+ !          !                    !             !--asian--H
+ !          !                    !             !--black--L
  !          !                    !--senior--L
  !          !--high--H
  !--good--L

@@ -62,8 +62,8 @@ def main(fname):
         e = json.load(f)
     with open('../data/'+fname) as f:
         tr = json.load(f)
-    acc = accuracy(tr, testdata, e)
-    print(acc)
+    acc = accuracy(tr, testdata, e) * 100
+    print('Accuracy out of 100:', acc)
 
         #do something
 

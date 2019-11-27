@@ -3,47 +3,47 @@ CRED_HIS
  !          !--low--HEALTH
  !          !         !--normal--AGE
  !          !         !            !--youth--RACE
- !          !         !            !           !--white--1
- !          !         !            !           !--asian--2
- !          !         !            !           !--black--1
+ !          !         !            !           !--white--L
+ !          !         !            !           !--asian--H
+ !          !         !            !           !--black--L
  !          !         !            !--mid_age--RACE
- !          !         !            !             !--white--2
- !          !         !            !             !--asian--1
- !          !         !            !             !--black--2
+ !          !         !            !             !--white--H
+ !          !         !            !             !--asian--L
+ !          !         !            !             !--black--H
  !          !         !            !--senior--RACE
- !          !         !                         !--white--1
- !          !         !                         !--asian--1
- !          !         !                         !--black--2
+ !          !         !                         !--white--L
+ !          !         !                         !--asian--L
+ !          !         !                         !--black--H
  !          !         !--poor--AGE
  !          !                    !--youth--RACE
- !          !                    !           !--white--1
- !          !                    !           !--asian--1
- !          !                    !           !--black--2
+ !          !                    !           !--white--L
+ !          !                    !           !--asian--L
+ !          !                    !           !--black--H
  !          !                    !--mid_age--RACE
- !          !                    !             !--white--2
- !          !                    !             !--asian--2
- !          !                    !             !--black--1
+ !          !                    !             !--white--H
+ !          !                    !             !--asian--H
+ !          !                    !             !--black--L
  !          !                    !--senior--RACE
- !          !                                 !--white--2
- !          !                                 !--asian--1
- !          !                                 !--black--1
+ !          !                                 !--white--H
+ !          !                                 !--asian--L
+ !          !                                 !--black--L
  !          !--high--AGE
- !                     !--youth--2
- !                     !--mid_age--2
+ !                     !--youth--H
+ !                     !--mid_age--H
  !--good--INCOME
-            !--low--1
+            !--low--L
             !--high--HEALTH
                        !--normal--RACE
-                       !            !--white--1
-                       !            !--asian--1
+                       !            !--white--L
+                       !            !--asian--L
                        !            !--black--AGE
-                       !                        !--youth--1
-                       !                        !--mid_age--1
-                       !                        !--senior--1
+                       !                        !--youth--L
+                       !                        !--mid_age--L
+                       !                        !--senior--L
                        !--poor--RACE
                                   !--white--AGE
-                                  !           !--youth--1
-                                  !           !--mid_age--1
-                                  !           !--senior--1
-                                  !--asian--1
-                                  !--black--1
+                                  !           !--youth--L
+                                  !           !--mid_age--L
+                                  !           !--senior--L
+                                  !--asian--L
+                                  !--black--L

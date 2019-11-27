@@ -4,7 +4,7 @@ import math
 
 
 def retrieve_list():
-    my_list = [line.rstrip('\n') for line in open('train.txt')]
+    my_list = [line.rstrip('\n') for line in open('../data/train.txt')]
     return_list = []
     for rows in my_list:
         a = rows.split(" ")
@@ -146,11 +146,10 @@ def grow():
     my_dict.append(test_attribute)
     sub_val, sub_root = get_gain(u2, root_sub_attrs)
     for key in sub_val:
-        if type(sub_val[key]) is list:
+        if type(sub_val[key]) is int:
             continue
         if len(np.unique(sub_root[key]['RISK'])) == 1:
-            sub_val[str(key)] = np.unique(
-                sub_root[key]['RISK']).tolist()
+            sub_val[str(key)] = int(np.unique(sub_root[key]['RISK']).tolist()[0])
         header = sub_val[key]
         if type(header) is list:
             print(header)
@@ -164,13 +163,12 @@ def grow():
         sub_val[str(key)] = [header, sub_val2]
         sub_unique2 = np.unique(sub_root_2[key]['RISK'])
         for key2 in sub_val2:
-            if type(sub_val2[key2]) is list:
+            if type(sub_val2[key2]) is int:
                 continue
             if len(np.unique(sub_root_2[key2]['RISK'])) == 1:
-                sub_val2[str(key2)] = np.unique(
-                    sub_root_2[key2]['RISK']).tolist()
+                sub_val2[str(key2)] = int(np.unique(sub_root_2[key2]['RISK']).tolist()[0])
             header2 = sub_val2[key2]
-            if type(header2) is list:
+            if type(header2) is int:
                 continue
             sub_node2 = np.asarray(sub_root_2[key2][header2])
             u4 = np.unique(sub_node2)
@@ -181,16 +179,15 @@ def grow():
             for nn in sub_attrs2:
                 velve = np.unique(nn['RISK'])
                 if len(velve) == 1:
-                    sub_val3[str(key2)] = velve.tolist()
+                    sub_val3[str(key2)] = int(velve.tolist()[0])
             sub_val2[str(key2)] = [header2, sub_val3]
             for key3 in sub_val3:
-                if type(sub_val3[key3]) is list:
+                if type(sub_val3[key3]) is int:
                     continue
                 if len(np.unique(sub_root_3[key3]['RISK'])) == 1:
-                    sub_val3[str(key3)] = np.unique(
-                        sub_root_3[key3]['RISK']).tolist()
+                    sub_val3[str(key3)] = int(np.unique(sub_root_3[key3]['RISK']).tolist()[0])
                 header3 = sub_val3[key3]
-                if type(header3) is list:
+                if type(header3) is int:
                     continue
                 # print(header3)
                 sub_node3 = np.asarray(sub_root_3[key3][header3])
@@ -202,14 +199,13 @@ def grow():
                 for nn2 in sub_attrs3:
                     velve2 = np.unique(nn2['RISK'])
                     if len(velve2) == 1:
-                        sub_val4[str(key3)] = velve2.tolist()
+                        sub_val4[str(key3)] = int(velve2.tolist()[0])
                 sub_val3[str(key3)] = [header3, sub_val4]
                 for key4 in sub_val4:
                     if len(np.unique(sub_root_4[key4]['RISK'])) == 1:
-                        sub_val4[str(key4)] = np.unique(
-                            sub_root_4[key4]['RISK']).tolist()
+                        sub_val4[str(key4)] = int(np.unique(sub_root_4[key4]['RISK']).tolist()[0])
                     header4 = sub_val4[key4]
-                    if type(header4) is list:
+                    if type(header4) is int:
                         continue
                     sub_node4 = np.asarray(sub_root_4[key4][header4])
                     u6 = np.unique(sub_node4)
@@ -223,11 +219,10 @@ def grow():
                             ht.append([a[0]])
                     df = {}
                     for i in range(len(u6)):
-                        df[u6[i]] = ht[i]
+                        df[u6[i]] = int(ht[i][0])
                     sub_val4[str(key4)] = [header4, df]
     my_dict.append(sub_val)
-    print(my_dict)
-    with open("train_decision_tree.txt", 'w') as f:
+    with open("../data/train_decision_tree.txt", 'w') as f:
         json.dump(my_dict, f)
 
 
