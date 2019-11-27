@@ -1,0 +1,49 @@
+CRED_HIS
+ !--poor--INCOME
+ !          !--low--HEALTH
+ !          !         !--normal--AGE
+ !          !         !            !--youth--RACE
+ !          !         !            !           !--white--1
+ !          !         !            !           !--asian--2
+ !          !         !            !           !--black--1
+ !          !         !            !--mid_age--RACE
+ !          !         !            !             !--white--2
+ !          !         !            !             !--asian--1
+ !          !         !            !             !--black--2
+ !          !         !            !--senior--RACE
+ !          !         !                         !--white--1
+ !          !         !                         !--asian--1
+ !          !         !                         !--black--2
+ !          !         !--poor--AGE
+ !          !                    !--youth--RACE
+ !          !                    !           !--white--1
+ !          !                    !           !--asian--1
+ !          !                    !           !--black--2
+ !          !                    !--mid_age--RACE
+ !          !                    !             !--white--2
+ !          !                    !             !--asian--2
+ !          !                    !             !--black--1
+ !          !                    !--senior--RACE
+ !          !                                 !--white--2
+ !          !                                 !--asian--1
+ !          !                                 !--black--1
+ !          !--high--AGE
+ !                     !--youth--2
+ !                     !--mid_age--2
+ !--good--INCOME
+            !--low--1
+            !--high--HEALTH
+                       !--normal--RACE
+                       !            !--white--1
+                       !            !--asian--1
+                       !            !--black--AGE
+                       !                        !--youth--1
+                       !                        !--mid_age--1
+                       !                        !--senior--1
+                       !--poor--RACE
+                                  !--white--AGE
+                                  !           !--youth--1
+                                  !           !--mid_age--1
+                                  !           !--senior--1
+                                  !--asian--1
+                                  !--black--1

@@ -1,0 +1,13 @@
+CRED_HIS
+ !--poor--INCOME
+ !          !--low--HEALTH
+ !          !         !--normal--AGE
+ !          !         !            !--youth--H
+ !          !         !            !--mid_age--H
+ !          !         !            !--senior--L
+ !          !         !--poor--AGE
+ !          !                    !--youth--H
+ !          !                    !--mid_age--H
+ !          !                    !--senior--L
+ !          !--high--H
+ !--good--L
