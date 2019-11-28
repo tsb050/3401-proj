@@ -3,14 +3,14 @@ CRED_HIS
  !          !--low--HEALTH
  !          !         !--normal--AGE
  !          !         !            !--youth--H
- !          !         !            !--mid_age--H
  !          !         !            !--senior--L
+ !          !         !            !--mid_age--H
  !          !         !--poor--AGE
  !          !                    !--youth--H
- !          !                    !--mid_age--RACE
- !          !                    !             !--white--H
- !          !                    !             !--asian--H
- !          !                    !             !--black--L
  !          !                    !--senior--L
+ !          !                    !--mid_age--RACE
+ !          !                                  !--white--H
+ !          !                                  !--black--L
+ !          !                                  !--asian--H
  !          !--high--H
  !--good--L

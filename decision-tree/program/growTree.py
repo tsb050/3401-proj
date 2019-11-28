@@ -222,8 +222,10 @@ def grow():
                         df[u6[i]] = int(ht[i][0])
                     sub_val4[str(key4)] = [header4, df]
     my_dict.append(sub_val)
-    with open("../data/train_decision_tree.txt", 'w') as f:
+    output_file = "../data/train_decision_tree.txt"
+    with open(output_file, 'w') as f:
         json.dump(my_dict, f)
+    return output_file
 
 
 def get_gain(unique, attr):
@@ -262,8 +264,5 @@ def get_gain(unique, attr):
 
 
 def main():
-    grow()
-
-
-if __name__ == "__main__":
-    main()
+    decision_tree = grow()
+    return decision_tree

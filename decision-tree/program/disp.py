@@ -48,9 +48,3 @@ def showIt(fname):
         with open('../data/treePicFull.txt','a+') as f:
             dispTree(tr,m,[],[],f)
 
-
-def main():
-    showIt('train_decision_tree.txt')
-
-
-main()

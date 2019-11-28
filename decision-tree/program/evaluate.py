@@ -65,6 +65,3 @@ def main(fname):
     acc = accuracy(tr, testdata, e) * 100
     print('Accuracy out of 100:', acc)
 
-        #do something
-
-main('train_decision_tree.txt')

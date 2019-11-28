@@ -141,5 +141,3 @@ def main(fname):
         json.dump(a,f)
     showIt('treeFilePruned.txt')
     return 'treeFilePruned.txt'
-
-main('train_decision_tree.txt')
